@@ -22,11 +22,6 @@ class Navigation extends Component {
         this.setState({ drawerOpened: false });
     }
 
-    onMenuCLick(route) {
-        this.context.router.transitionTo(route);
-        this.setState({ drawerOpened: false });
-    }
-
     render() {
         return (
             <div>

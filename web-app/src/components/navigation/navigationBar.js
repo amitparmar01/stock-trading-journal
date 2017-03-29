@@ -79,8 +79,4 @@ class NavigationBar extends Component {
     }
 }
 
-NavigationBar.contextTypes = {
-    router: React.PropTypes.object
-};
-
 export default NavigationBar;
