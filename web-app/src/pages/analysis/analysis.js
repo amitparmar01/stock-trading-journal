@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 
-class Analysis extends Component {
+import AppActions from '../../shared/appActions';
+
+class Analysis extends Component {    
+    componentDidMount() {
+        AppActions.updateTitle("Analysis");
+    }
+
     render() {
         return (
             <div>

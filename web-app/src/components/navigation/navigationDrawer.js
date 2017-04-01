@@ -43,7 +43,7 @@ class NavigationDrawer extends Component {
             <Drawer docked={ false } width={ 300 } open={ this.props.open } onRequestChange={ this.onRequestChange } >
                 <div style={ this.styles.menuTopSpace } />
                 <MenuItem onTouchTap={ () => { this.onMenuItemClick("/dashboard") } } style={ this.styles.drawer }>Dashboard</MenuItem>
-                <MenuItem onTouchTap={ () => { this.onMenuItemClick("/journal") } } style={ this.styles.drawer }>Journal</MenuItem>
+                <MenuItem onTouchTap={ () => { this.onMenuItemClick("/trades") } } style={ this.styles.drawer }>Trades</MenuItem>
                 <MenuItem onTouchTap={ () => { this.onMenuItemClick("/analysis") } } style={ this.styles.drawer }>Analysis</MenuItem>
                 <Logo size={ 55 } style={ this.styles.logo } />
             </Drawer>

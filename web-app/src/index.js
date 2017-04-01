@@ -15,10 +15,11 @@ import './index.css';
 import LoginStore from './shared/stores/loginStore';
 import Home from './pages/home/home';
 import Dashboard from './pages/dashboard/dashboard';
-import Journal from './pages/journal/journal';
+import Trades from './pages/trades/trades';
 import Analysis from './pages/analysis/analysis';
 import Error from './pages/error/error';
 import Login from './pages/login/login';
+import Signup from './pages/signup/signup';
 import PageNotFound from './pages/pageNotFound/pageNotFound';
 
 class App extends Component {
@@ -41,9 +42,10 @@ class App extends Component {
                             <Switch>
                                 <Route exact path="/" component={ Home } />
                                 <Route path="/dashboard" render={ () => this.checkAuthentication(<Dashboard />) } />
-                                <Route path="/journal" render={ () => this.checkAuthentication(<Journal />) } />
+                                <Route path="/trades" render={ () => this.checkAuthentication(<Trades />) } />
                                 <Route path="/analysis" render={ () => this.checkAuthentication(<Analysis />) } />
                                 <Route path="/login" component={ Login } />
+                                <Route path="/signup" component={ Signup } />
                                 <Route path="/error" render={ () => this.checkAuthentication(<Error />) } />
                                 <Route render={ () => this.checkAuthentication(<PageNotFound />) } />
                             </Switch>

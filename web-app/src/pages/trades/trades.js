@@ -2,18 +2,17 @@ import React, { Component } from 'react';
 
 import AppActions from '../../shared/appActions';
 
-class Error extends Component {
+class Trades extends Component {
     componentDidMount() {
-        AppActions.updateTitle("Error");
+        AppActions.updateTitle("Trades");
     }
-
     render() {
         return (
             <div>
-                500!!!
+                trades here!
             </div>
         );
     }
 }
 
-export default Error;
+export default Trades;

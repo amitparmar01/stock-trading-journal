@@ -1,6 +1,7 @@
 
 import EventEmitter from 'events';
 import AppDispatcher from '../appDispatcher';
+import AppConstants from '../appConstants';
 
 const CHANGE_EVENT = 'change';
 const AUTH_STORAGE_KEY = 'USER_AUTH';
@@ -14,7 +15,7 @@ class LoginStore extends EventEmitter {
         
         AppDispatcher.register(action => {
            switch (action.actionType) {
-               case 'AUTHENTICATE':
+               case AppConstants.ActionTypes.AUTHENTICATE:
                    this.user = action.data.user;
                    this.error = action.data.error;
                    sessionStorage.setItem(AUTH_STORAGE_KEY, action.data.user.id);

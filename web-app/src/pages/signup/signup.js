@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import './journal.css';
 
-class Journal extends Component {
+class Signup extends Component {
     render() {
         return (
             <div>
-                journal here!
+                Signup!!!
             </div>
         );
     }
 }
 
-export default Journal;
+export default Signup;
