@@ -7,7 +7,7 @@ import Paper from 'material-ui/Paper';
 import AppStore from '../../shared/appStore';
 import AppActions from '../../shared/appActions';
 
-class Login extends Component {
+class ResetPassword extends Component {
     constructor() {
         super();
 
@@ -18,15 +18,19 @@ class Login extends Component {
                 display: 'flex',
                 flexDirection: 'column'
             },
-            signInButtonContainer: {
+            resetButtonContainer: {
                 display: 'flex',
                 justifyContent: 'flex-end',
-                alignItems: 'center',
                 marginTop: 30
+            },
+            signInLinkContainer: {
+                display: 'flex',
+                marginTop: 30,
+                justifyContent: 'flex-end'
             },
             signUpLinkContainer: {
                 display: 'flex',
-                marginTop: 30,
+                marginTop: 10,
                 justifyContent: 'flex-end'
             },
             marginRight: {
@@ -46,7 +50,7 @@ class Login extends Component {
     }
 
     onChange() {
-        this.context.router.history.push("/dashboard");
+        // display: please check your email for instructions
     }
 
     render() {
@@ -54,10 +58,12 @@ class Login extends Component {
             <Paper zDepth={ 1 }>
             <div style={ this.styles.main }>
                 <TextField floatingLabelText="Email" fullWidth={ true } />
-                <TextField floatingLabelText="Password" type="password" fullWidth={ true } />
-                <div style={ this.styles.signInButtonContainer }>
-                    <Link to="/reset-password" style={ this.styles.marginRight }>Forgot your password?</Link>
-                    <RaisedButton label="Sign in" primary={ true } onTouchTap={ () => { AppActions.signIn("", "") } } />
+                <div style={ this.styles.resetButtonContainer }>
+                    <RaisedButton label="Reset password" primary={ true } onTouchTap={ () => { AppActions.resetPassword("") } } />
+                </div>
+                <div style={ this.styles.signInLinkContainer }>
+                    <div style={ this.styles.marginRight }>Already a member?</div>
+                    <Link to="/signin">Sign in</Link>
                 </div>
                 <div style={ this.styles.signUpLinkContainer }>
                     <div style={ this.styles.marginRight }>Don't have an account?</div>
@@ -69,8 +75,4 @@ class Login extends Component {
     }
 }
 
-Login.contextTypes = {
-    router: React.PropTypes.object
-};
-
-export default Login;
+export default ResetPassword;

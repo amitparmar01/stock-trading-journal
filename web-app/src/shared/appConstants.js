@@ -11,11 +11,18 @@ module.exports = {
             STORIES:        APIRoot + "/v1/stories"
         }
     },
+    Control: {
+        Small: 50,
+        Medium: 80,
+        Big: 120
+    },
     ActionTypes: keyMirror({
     // App
     UPDATE_TITLE: null,
 
     // Login
-    AUTHENTICATE: null
+    SIGN_UP: null,
+    SIGN_IN: null,
+    RESET_PASSWORD: null
   })
 };

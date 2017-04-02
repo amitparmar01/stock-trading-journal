@@ -4,6 +4,7 @@ import AppDispatcher from './appDispatcher';
 import AppConstants from './appConstants';
 
 const CHANGE_EVENT = 'change';
+const AUTH_STORAGE_KEY = 'USER_AUTH';
 
 class AppStore extends EventEmitter {
     constructor(props) {
@@ -11,10 +12,24 @@ class AppStore extends EventEmitter {
         
         this.title = "";
 
+        this.user = null;
+        this.error = "";
+        
         AppDispatcher.register(action => {
            switch (action.actionType) {
                case AppConstants.ActionTypes.UPDATE_TITLE:
                    this.title = action.data;
+                   this.emit(CHANGE_EVENT);
+                   break;
+                case AppConstants.ActionTypes.SIGN_IN:
+               case AppConstants.ActionTypes.SIGN_UP:
+                   this.user = action.data.user;
+                   this.error = action.data.error;
+                   sessionStorage.setItem(AUTH_STORAGE_KEY, action.data.user.id);
+                   this.emit(CHANGE_EVENT);
+                   break;
+                case AppConstants.ActionTypes.RESET_PASSWORD:
+                   this.error = action.data.error;
                    this.emit(CHANGE_EVENT);
                    break;
                 default:
@@ -33,6 +48,25 @@ class AppStore extends EventEmitter {
 
     getTitle() {
         return this.title;
+    }
+
+    isUserAuthenticated() {
+        var authStorage = sessionStorage.getItem(AUTH_STORAGE_KEY);
+        return  this.user != null && authStorage != null;
+    }
+
+    getAuthenticatedUser() {
+        return this.user;
+    }
+
+    getUserLastError() {
+        return this.error;
+    }
+
+    signOut() {
+        this.user = null;
+        this.error = "";
+        sessionStorage.removeItem(AUTH_STORAGE_KEY);
     }
 }
 

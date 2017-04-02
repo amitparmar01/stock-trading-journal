@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import NavigationBar from './navigationBar';
 import NavigationDrawer from './navigationDrawer';
 
+import './navigation.css';
+
 class Navigation extends Component {
     constructor() {
         super();

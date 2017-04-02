@@ -17,7 +17,6 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import Sticky from 'react-sticky';
 
 import AppColors from '../theme/appColors';
-import LoginStore from '../../shared/stores/loginStore';
 import AppStore from '../../shared/appStore';
 
 class NavigationBar extends Component {
@@ -103,7 +102,7 @@ class NavigationBar extends Component {
     }
 
     onSignOut() {
-        LoginStore.signOut();
+        AppStore.signOut();
         this.setState({ openPopover: false });
         this.context.router.history.push("/");
     }
@@ -120,7 +119,7 @@ class NavigationBar extends Component {
                         <IconButton disableTouchRipple={ true } onTouchTap={ this.onMenuIconClick } style={ this.styles.menuIcon }>
                             <MenuIcon color={ AppColors.light3 } />
                         </IconButton>
-                        <ToolbarTitle text={ <Link to="/">Stock Trading Journal</Link> } />
+                        <ToolbarTitle text={ <Link className="main-link" to="/">Stock Trading Journal</Link> } />
                     </ToolbarGroup>
                     <ToolbarGroup>
                         <Badge badgeContent={4} style={ this.styles.badge } badgeStyle={ this.styles.badgeContent }>
@@ -131,7 +130,7 @@ class NavigationBar extends Component {
                         <IconButton tooltip="Help">
                             <HelpIcon color={ AppColors.light3 } />
                         </IconButton>
-                        <div style={ this.styles.username }>{ LoginStore.getAuthenticatedUser().email }</div>
+                        <div style={ this.styles.username }>{ AppStore.getAuthenticatedUser().email }</div>
                         <IconButton disableTouchRipple={ true } onTouchTap={ this.onIconButtonClick }>
                             <NavigationExpandMoreIcon color={ AppColors.light3 } />
                         </IconButton>
@@ -167,11 +166,11 @@ class NavigationBar extends Component {
                 <Toolbar>
                     <ToolbarGroup firstChild={true}>
                         <div style={ this.styles.spacer } />
-                        <ToolbarTitle text={ <Link to="/">Stock Trading Journal</Link> } />
+                        <ToolbarTitle text={ <Link className="main-link" to="/">Stock Trading Journal</Link> } />
                     </ToolbarGroup>
                     <ToolbarGroup>
-                        <FlatButton style={ this.styles.button } label="Signup" onTouchTap={ () => { this.linkTo("/signup") } } />
-                        <FlatButton style={ this.styles.button } label="Login" onTouchTap={ () => { this.linkTo("/login") } } />
+                        <FlatButton style={ this.styles.button } label="Sign up" onTouchTap={ () => { this.linkTo("/signup") } } />
+                        <FlatButton style={ this.styles.button } label="Sign in" onTouchTap={ () => { this.linkTo("/login") } } />
                     </ToolbarGroup>
                 </Toolbar>
             </div>
@@ -179,7 +178,7 @@ class NavigationBar extends Component {
     }
 
     getToolbarControls() {
-        if (LoginStore.isUserAuthenticated()) {
+        if (AppStore.isUserAuthenticated()) {
             return this.getLoggedInControls();
         }
 

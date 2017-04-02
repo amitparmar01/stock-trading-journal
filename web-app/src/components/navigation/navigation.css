@@ -1,0 +1,8 @@
+a.main-link,
+a.main-link:link,
+a.main-link:visited,
+a.main-link:hover,
+a.main-link:active {
+    color: #eaeaea;
+    text-decoration: none;
+}
