@@ -4,33 +4,29 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 
-import AppStore from '../../shared/appStore';
-import AppActions from '../../shared/appActions';
+import AppStore from '../../../shared/appStore';
+import AppActions from '../../../shared/appActions';
 
-class Signup extends Component {
+class Login extends Component {
     constructor() {
         super();
 
         this.styles = {
             main: {
-                width: 340,
+                width: 300,
                 margin: 40,
                 display: 'flex',
                 flexDirection: 'column'
             },
-            signUpButtonContainer: {
+            signInButtonContainer: {
                 display: 'flex',
                 justifyContent: 'flex-end',
+                alignItems: 'center',
                 marginTop: 30
             },
-            signInLinkContainer: {
+            signUpLinkContainer: {
                 display: 'flex',
                 marginTop: 30,
-                justifyContent: 'flex-end'
-            },
-            termsLinkContainer: {
-                display: 'flex',
-                marginTop: 10,
                 justifyContent: 'flex-end'
             },
             marginRight: {
@@ -58,18 +54,14 @@ class Signup extends Component {
             <Paper zDepth={ 1 }>
             <div style={ this.styles.main }>
                 <TextField floatingLabelText="Email" fullWidth={ true } />
-                <TextField floatingLabelText="Password" hintText="6 characters minimum" type="password" fullWidth={ true } />
-                <TextField floatingLabelText="Password confirmation" hintText="Must match password" type="password" fullWidth={ true } />
-                <div style={ this.styles.signUpButtonContainer }>
-                    <RaisedButton label="Sign up" primary={ true } onTouchTap={ () => { AppActions.signUp("", "") } } />
+                <TextField floatingLabelText="Password" type="password" fullWidth={ true } />
+                <div style={ this.styles.signInButtonContainer }>
+                    <Link to="/reset-password" style={ this.styles.marginRight }>Forgot your password?</Link>
+                    <RaisedButton label="Sign in" primary={ true } onTouchTap={ () => { AppActions.signIn("", "") } } />
                 </div>
-                <div style={ this.styles.signInLinkContainer }>
-                    <div style={ this.styles.marginRight }>Already a member?</div>
-                    <Link to="/signin">Sign in</Link>
-                </div>
-                <div style={ this.styles.termsLinkContainer }>
-                    <div style={ this.styles.marginRight }>By signing up, you agree to our </div>
-                    <Link to="/terms">Terms of use</Link>
+                <div style={ this.styles.signUpLinkContainer }>
+                    <div style={ this.styles.marginRight }>Don't have an account?</div>
+                    <Link to="/signup">Sign up</Link>
                 </div>
             </div>
             </Paper>
@@ -77,4 +69,8 @@ class Signup extends Component {
     }
 }
 
-export default Signup;
+Login.contextTypes = {
+    router: React.PropTypes.object
+};
+
+export default Login;

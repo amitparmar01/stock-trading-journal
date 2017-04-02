@@ -17,12 +17,12 @@ import Home from './pages/home/home';
 import Dashboard from './pages/dashboard/dashboard';
 import Trades from './pages/trades/trades';
 import Analysis from './pages/analysis/analysis';
-import Error from './pages/error/error';
-import Login from './pages/login/login';
-import Signup from './pages/signup/signup';
-import ResetPassword from './pages/resetPassword/resetPassword';
+import Login from './pages/account/login/login';
+import Signup from './pages/account/signup/signup';
+import ResetPassword from './pages/account/resetPassword/resetPassword';
 import Terms from './pages/terms/terms';
-import PageNotFound from './pages/pageNotFound/pageNotFound';
+import InternalServerError from './pages/errors/internalServerError/internalServerError';
+import PageNotFound from './pages/errors/pageNotFound/pageNotFound';
 
 class App extends Component {
     constructor() {
@@ -69,7 +69,7 @@ class App extends Component {
                                     <Route path="/signup" component={ Signup } />
                                     <Route path="/reset-password" component={ ResetPassword } />
                                     <Route path="/terms" component={ Terms } />
-                                    <Route path="/error" render={ () => this.checkAuthentication(<Error />) } />
+                                    <Route path="/500" render={ () => this.checkAuthentication(<InternalServerError />) } />
                                     <Route render={ () => this.checkAuthentication(<PageNotFound />) } />
                                 </Switch>
                             </div>

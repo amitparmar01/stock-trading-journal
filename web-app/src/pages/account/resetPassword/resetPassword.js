@@ -4,8 +4,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 
-import AppStore from '../../shared/appStore';
-import AppActions from '../../shared/appActions';
+import AppStore from '../../../shared/appStore';
+import AppActions from '../../../shared/appActions';
 
 class ResetPassword extends Component {
     constructor() {

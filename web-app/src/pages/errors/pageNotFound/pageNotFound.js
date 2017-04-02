@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import AppActions from '../../shared/appActions';
+import AppActions from '../../../shared/appActions';
 
-class Error extends Component {
+class PageNotFound extends Component {
     componentDidMount() {
         AppActions.updateTitle("Error");
     }
@@ -10,10 +10,10 @@ class Error extends Component {
     render() {
         return (
             <div>
-                500!!!
+                404!!!
             </div>
         );
     }
 }
 
-export default Error;
+export default PageNotFound;
