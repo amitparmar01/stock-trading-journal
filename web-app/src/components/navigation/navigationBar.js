@@ -6,6 +6,7 @@ import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-mo
 import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
 import { Link } from 'react-router-dom';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
+import Dialog from 'material-ui/Dialog';
 import Divider from 'material-ui/Divider';
 import Badge from 'material-ui/Badge';
 import Menu from 'material-ui/Menu';
@@ -25,7 +26,8 @@ class NavigationBar extends Component {
 
         this.state = {
             title: "",
-            openPopover: false
+            openPopover: false,
+            contactUsDialogOpen: false
         };
 
         this.styles = {
@@ -72,6 +74,8 @@ class NavigationBar extends Component {
         this.onPopoverClose = this.onPopoverClose.bind(this);
         this.onChange = this.onChange.bind(this);
         this.linkTo = this.linkTo.bind(this);
+        this.onContactUs = this.onContactUs.bind(this);
+        this.onContactUsClose = this.onContactUsClose.bind(this);
         this.onSignOut = this.onSignOut.bind(this);
     }
 
@@ -111,7 +115,20 @@ class NavigationBar extends Component {
         this.setState({ openPopover: false });
     }
 
+    onContactUs() {
+        this.setState({ contactUsDialogOpen: true, openPopover: false });
+    }
+
+    onContactUsClose() {
+        this.setState({ contactUsDialogOpen: false });
+    }
+
     getLoggedInControls() {
+        const contactUsDialogActions = [
+            <FlatButton label="Cancel" primary={ true } onTouchTap={ this.onContactUsClose } />,
+            <FlatButton label="Submit" primary={ true } keyboardFocused={ true } onTouchTap={ this.onContactUsClose } />
+        ];
+
         return (
             <div>
                 <Toolbar>
@@ -134,15 +151,10 @@ class NavigationBar extends Component {
                         <IconButton disableTouchRipple={ true } onTouchTap={ this.onIconButtonClick }>
                             <NavigationExpandMoreIcon color={ AppColors.light3 } />
                         </IconButton>
-                        <Popover
-                            open={ this.state.openPopover }
-                            anchorEl={this.state.anchorEl}
-                            onRequestClose={ this.onPopoverClose }
-                            animation={ PopoverAnimationVertical }
-                            >
+                        <Popover open={ this.state.openPopover } anchorEl={this.state.anchorEl} onRequestClose={ this.onPopoverClose } animation={ PopoverAnimationVertical }>
                             <Menu>
                                 <MenuItem primaryText="Settings" />
-                                <MenuItem primaryText="Contact us" />
+                                <MenuItem primaryText="Contact us" onTouchTap={ this.onContactUs } />
                                 <MenuItem primaryText="Upgrade account" />
                                 <Divider />
                                 <MenuItem primaryText="Sign out" onTouchTap={ this.onSignOut } />
@@ -156,6 +168,9 @@ class NavigationBar extends Component {
                 <FloatingActionButton mini={ true } backgroundColor={ AppColors.bright3 } style={ this.styles.addButton } title="Add trade" >
                     <ContentAdd />
                 </FloatingActionButton>
+                <Dialog title="Contact us" actions={ contactUsDialogActions } open={ this.state.contactUsDialogOpen } onRequestClose={ this.onContactUsClose }>
+                    The actions in this window were passed in as an array of React objects.
+                </Dialog>
             </div>
         );
     }

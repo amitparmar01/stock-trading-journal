@@ -16,22 +16,29 @@ class AppStore extends EventEmitter {
         this.error = "";
         
         AppDispatcher.register(action => {
-           switch (action.actionType) {
-               case AppConstants.ActionTypes.UPDATE_TITLE:
-                   this.title = action.data;
-                   this.emit(CHANGE_EVENT);
-                   break;
+            switch (action.actionType) {
+                case AppConstants.ActionTypes.UPDATE_TITLE:
+                    this.title = action.data;
+                    this.emit(CHANGE_EVENT);
+                    break;
                 case AppConstants.ActionTypes.SIGN_IN:
-               case AppConstants.ActionTypes.SIGN_UP:
-                   this.user = action.data.user;
-                   this.error = action.data.error;
-                   sessionStorage.setItem(AUTH_STORAGE_KEY, action.data.user.id);
-                   this.emit(CHANGE_EVENT);
-                   break;
+                case AppConstants.ActionTypes.SIGN_UP:
+                    if (action.data.error === "") {
+                        this.error = "";
+                        this.user = action.data.user;
+                        sessionStorage.setItem(AUTH_STORAGE_KEY, action.data.user.email);
+                    }
+                    else {
+                        this.user = null;
+                        this.error = action.data.error;
+                    }
+                    
+                    this.emit(CHANGE_EVENT);
+                    break;
                 case AppConstants.ActionTypes.RESET_PASSWORD:
-                   this.error = action.data.error;
-                   this.emit(CHANGE_EVENT);
-                   break;
+                    this.error = action.data.error;
+                    this.emit(CHANGE_EVENT);
+                    break;
                 default:
                     break;
            } 
