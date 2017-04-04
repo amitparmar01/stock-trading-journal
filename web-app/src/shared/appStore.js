@@ -14,11 +14,18 @@ class AppStore extends EventEmitter {
 
         this.user = null;
         this.error = "";
+        this.ajaxError = "";
         
         AppDispatcher.register(action => {
+            this.error = action.data.error;
+            this.ajaxError = action.data.ajaxError;
+
             switch (action.actionType) {
                 case AppConstants.ActionTypes.UPDATE_TITLE:
-                    this.title = action.data;
+                    this.title = action.data.title;
+                    this.emit(CHANGE_EVENT);
+                    break;
+                case AppConstants.ActionTypes.SEND_CONTACT_US_MESSAGE:
                     this.emit(CHANGE_EVENT);
                     break;
                 case AppConstants.ActionTypes.SIGN_IN:
@@ -30,13 +37,10 @@ class AppStore extends EventEmitter {
                     }
                     else {
                         this.user = null;
-                        this.error = action.data.error;
-                    }
-                    
+                    }                    
                     this.emit(CHANGE_EVENT);
                     break;
                 case AppConstants.ActionTypes.RESET_PASSWORD:
-                    this.error = action.data.error;
                     this.emit(CHANGE_EVENT);
                     break;
                 default:

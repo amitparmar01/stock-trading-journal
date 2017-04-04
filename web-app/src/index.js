@@ -17,6 +17,7 @@ import Home from './pages/home/home';
 import Dashboard from './pages/dashboard/dashboard';
 import Trades from './pages/trades/trades';
 import Analysis from './pages/analysis/analysis';
+import Analytics from './pages/analytics/analytics';
 import Login from './pages/account/login/login';
 import Signup from './pages/account/signup/signup';
 import ResetPassword from './pages/account/resetPassword/resetPassword';
@@ -65,6 +66,7 @@ class App extends Component {
                                     <Route path="/dashboard" render={ () => this.checkAuthentication(<Dashboard />) } />
                                     <Route path="/trades" render={ () => this.checkAuthentication(<Trades />) } />
                                     <Route path="/analysis" render={ () => this.checkAuthentication(<Analysis />) } />
+                                    <Route path="/analytics" render={ () => this.checkAuthentication(<Analytics />) } />
                                     <Route path="/login" component={ Login } />
                                     <Route path="/signup" component={ Signup } />
                                     <Route path="/reset-password" component={ ResetPassword } />

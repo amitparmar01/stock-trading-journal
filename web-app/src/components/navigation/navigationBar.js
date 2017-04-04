@@ -6,6 +6,8 @@ import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-mo
 import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
 import { Link } from 'react-router-dom';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
+import TextField from 'material-ui/TextField';
+import SelectField from 'material-ui/SelectField';
 import Dialog from 'material-ui/Dialog';
 import Divider from 'material-ui/Divider';
 import Badge from 'material-ui/Badge';
@@ -19,6 +21,7 @@ import Sticky from 'react-sticky';
 
 import AppColors from '../theme/appColors';
 import AppStore from '../../shared/appStore';
+import AppActions from '../../shared/appActions';
 
 class NavigationBar extends Component {
     constructor() {
@@ -27,14 +30,21 @@ class NavigationBar extends Component {
         this.state = {
             title: "",
             openPopover: false,
-            contactUsDialogOpen: false
+            contactUsDialogOpen: false,
+            contactUsReasonValue: "",
+            contactUsError: "",
+            contactUsTextValue: "",
+            contactUsTextError: ""
         };
 
         this.styles = {
+            sticky: {
+                zIndex: 999
+            },
             spacer: {
                 width: 20
             },
-            button: {
+            linkButton: {
                 margin: 0,
                 color: AppColors.light3
             },
@@ -67,6 +77,13 @@ class NavigationBar extends Component {
                 zIndex: 1,
                 color: AppColors.light3,
                 backgroundColor: AppColors.bright3
+            },
+            contactUsMain: {
+                display: 'flex',
+                flexDirection: 'column'
+            },
+            contactUsTextarea: {
+                resize: 'none'
             }
         };
 
@@ -76,6 +93,9 @@ class NavigationBar extends Component {
         this.linkTo = this.linkTo.bind(this);
         this.onContactUs = this.onContactUs.bind(this);
         this.onContactUsClose = this.onContactUsClose.bind(this);
+        this.onContactUsReasonChange = this.onContactUsReasonChange.bind(this);
+        this.onContactUsTextChange = this.onContactUsTextChange.bind(this);
+        this.onContactUsSend = this.onContactUsSend.bind(this);
         this.onSignOut = this.onSignOut.bind(this);
     }
 
@@ -119,6 +139,34 @@ class NavigationBar extends Component {
         this.setState({ contactUsDialogOpen: true, openPopover: false });
     }
 
+    onContactUsReasonChange(event, index, value) {
+        this.setState({ contactUsReasonValue: value, contactUsReasonError: "" });
+    }
+
+    onContactUsTextChange(event, value) {
+        this.setState({ contactUsTextValue: value, contactUsTextError: "" });
+    }
+
+    onContactUsSend() {
+        var contactUsReasonErrorText = "";
+        var contactUsTextErrorText = "";
+
+        if (this.state.contactUsReasonValue === "") {
+            contactUsReasonErrorText = "Reason for contacting us is required";
+        }
+        if (this.state.contactUsTextValue === "") {
+            contactUsTextErrorText = "Message text is required";
+        }
+
+        if (contactUsReasonErrorText !== "" || contactUsTextErrorText !== "") {
+            this.setState({ contactUsReasonError: contactUsReasonErrorText, contactUsTextError: contactUsTextErrorText });
+        }
+        else {
+            AppActions.SendContactUsMessage(this.state.contactUsReasonValue, this.state.contactUsTextValue);
+            this.setState({ contactUsDialogOpen: false });
+        }
+    }
+
     onContactUsClose() {
         this.setState({ contactUsDialogOpen: false });
     }
@@ -126,7 +174,7 @@ class NavigationBar extends Component {
     getLoggedInControls() {
         const contactUsDialogActions = [
             <FlatButton label="Cancel" primary={ true } onTouchTap={ this.onContactUsClose } />,
-            <FlatButton label="Submit" primary={ true } keyboardFocused={ true } onTouchTap={ this.onContactUsClose } />
+            <FlatButton label="Send" primary={ true } onTouchTap={ this.onContactUsSend } />
         ];
 
         return (
@@ -169,7 +217,15 @@ class NavigationBar extends Component {
                     <ContentAdd />
                 </FloatingActionButton>
                 <Dialog title="Contact us" actions={ contactUsDialogActions } open={ this.state.contactUsDialogOpen } onRequestClose={ this.onContactUsClose }>
-                    The actions in this window were passed in as an array of React objects.
+                    <div style={ this.styles.contactUsMain }>
+                        <SelectField value={ this.state.contactUsReasonValue } floatingLabelText="Reason for contacting us" onChange={ this.onContactUsReasonChange } errorText={ this.state.contactUsReasonError }>
+                            <MenuItem key={ 4 } value={ "General question" } primaryText="General question" />
+                            <MenuItem key={ 1 } value={ "Suggestion or feedback" } primaryText="Suggestion or feedback" />
+                            <MenuItem key={ 2 } value={ "Problem with the website" } primaryText="Problem with the website" />
+                            <MenuItem key={ 3 } value={ "Problem with payment" } primaryText="Problem with payment" />
+                        </SelectField>
+                        <TextField id="contact-us" value={ this.state.contactUsTextValue } style={ this.styles.contactUsTextarea } maxLength="1000" fullWidth={ true } multiLine={ true } rows={ 8 } rowsMax={ 14 } onChange={ this.onContactUsTextChange } errorText={ this.state.contactUsTextError } />
+                    </div>
                 </Dialog>
             </div>
         );
@@ -184,8 +240,8 @@ class NavigationBar extends Component {
                         <ToolbarTitle text={ <Link className="main-link" to="/">Stock Trading Journal</Link> } />
                     </ToolbarGroup>
                     <ToolbarGroup>
-                        <FlatButton style={ this.styles.button } label="Sign up" onTouchTap={ () => { this.linkTo("/signup") } } />
-                        <FlatButton style={ this.styles.button } label="Sign in" onTouchTap={ () => { this.linkTo("/login") } } />
+                        <FlatButton style={ this.styles.linkButton } label="Sign up" onTouchTap={ () => { this.linkTo("/signup") } } />
+                        <FlatButton style={ this.styles.linkButton } label="Sign in" onTouchTap={ () => { this.linkTo("/login") } } />
                     </ToolbarGroup>
                 </Toolbar>
             </div>
@@ -202,7 +258,7 @@ class NavigationBar extends Component {
 
     render() {
         return (
-            <Sticky>
+            <Sticky style={ this.styles.sticky }>
                 { this.getToolbarControls() }                
             </Sticky>
         );

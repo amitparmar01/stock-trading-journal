@@ -7,13 +7,13 @@ var AppActions = {
         if (email === "user@email.com") {
             AppDispatcher.dispatch({
                 actionType: AppConstants.ActionTypes.SIGN_UP,
-                data: { user: { email: email }, error: "" }
+                data: { user: { email: email }, error: "", ajaxError: "" }
             });
         }
         else {
             AppDispatcher.dispatch({
                 actionType: AppConstants.ActionTypes.SIGN_IN,
-                data: { user: null, error: "Email already exists. Try again!" }
+                data: { user: null, error: "Email already exists. Try again!", ajaxError: "" }
             });
         }
     },
@@ -23,13 +23,13 @@ var AppActions = {
         if (email === "user@email.com") {
             AppDispatcher.dispatch({
                 actionType: AppConstants.ActionTypes.SIGN_IN,
-                data: { user: { email: email }, error: "" }
+                data: { user: { email: email }, error: "", ajaxError: "" }
             });
         }
         else {
             AppDispatcher.dispatch({
                 actionType: AppConstants.ActionTypes.SIGN_IN,
-                data: { user: null, error: "Email or password is invalid. Try again!" }
+                data: { user: null, error: "Email or password is invalid. Try again!", ajaxError: "" }
             });
         }        
     },
@@ -38,14 +38,22 @@ var AppActions = {
         //simulate ajax call with ServerApi
         AppDispatcher.dispatch({
             actionType: AppConstants.ActionTypes.RESET_PASSWORD,
-            data: { error: "" }
+            data: { error: "", ajaxError: "" }
+        });
+    },
+
+    SendContactUsMessage(reason, message) {
+        //simulate ajax call with ServerApi
+        AppDispatcher.dispatch({
+            actionType: AppConstants.ActionTypes.SEND_CONTACT_US_MESSAGE,
+            data: { error: "", ajaxError: "" }
         });
     },
 
     updateTitle(title) {
         AppDispatcher.dispatch({
             actionType: AppConstants.ActionTypes.UPDATE_TITLE,
-            data: title
+            data: { title: title }
         });
     }
 }

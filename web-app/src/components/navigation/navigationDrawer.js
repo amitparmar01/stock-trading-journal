@@ -45,6 +45,7 @@ class NavigationDrawer extends Component {
                 <MenuItem onTouchTap={ () => { this.onMenuItemClick("/dashboard") } } style={ this.styles.drawer }>Dashboard</MenuItem>
                 <MenuItem onTouchTap={ () => { this.onMenuItemClick("/trades") } } style={ this.styles.drawer }>Trades</MenuItem>
                 <MenuItem onTouchTap={ () => { this.onMenuItemClick("/analysis") } } style={ this.styles.drawer }>Analysis</MenuItem>
+                <MenuItem onTouchTap={ () => { this.onMenuItemClick("/analytics") } } style={ this.styles.drawer }>Analytics</MenuItem>
                 <Logo size={ 55 } style={ this.styles.logo } />
             </Drawer>
         );

@@ -58,8 +58,9 @@ class Login extends Component {
     componentDidMount() {
         AppStore.addChangeListener(this.onChange);
         
-        // comment the below line out for production
-        //AppActions.signIn("user@email.com", "");
+        if (process.env.NODE_ENV === 'development') {
+            AppActions.signIn("user@email.com", "");
+        }
     }
 
     componentWillUnmount() {
@@ -101,25 +102,25 @@ class Login extends Component {
         }
         else {
             AppActions.signIn(this.state.emailValue, this.state.passwordValue);
-        }        
+        }
     }
 
     render() {
         return (
-            <Paper zDepth={ 1 }>
-            <div style={ this.styles.main }>
-                <div className="error-text" style={ this.styles.formError }>{ this.state.formError }</div>
-                <TextField value={ this.state.emailValue } floatingLabelText="Email" fullWidth={ true } errorText={ this.state.emailError } onChange={ this.onEmailChange } />
-                <TextField value={ this.state.passwordValue } floatingLabelText="Password" type="password" fullWidth={ true } errorText={ this.state.passwordError } onChange={ this.onPasswordChange } />
-                <div style={ this.styles.signInButtonContainer }>
-                    <Link to="/reset-password" style={ this.styles.marginRight }>Forgot your password?</Link>
-                    <RaisedButton label="Sign in" primary={ true } onTouchTap={ this.signIn } />
+            <Paper>
+                <div style={ this.styles.main }>
+                    <div className="error-text" style={ this.styles.formError }>{ this.state.formError }</div>
+                    <TextField value={ this.state.emailValue } floatingLabelText="Email" fullWidth={ true } errorText={ this.state.emailError } onChange={ this.onEmailChange } />
+                    <TextField value={ this.state.passwordValue } floatingLabelText="Password" type="password" fullWidth={ true } errorText={ this.state.passwordError } onChange={ this.onPasswordChange } />
+                    <div style={ this.styles.signInButtonContainer }>
+                        <Link to="/reset-password" style={ this.styles.marginRight }>Forgot your password?</Link>
+                        <RaisedButton label="Sign in" primary={ true } onTouchTap={ this.signIn } />
+                    </div>
+                    <div style={ this.styles.signUpLinkContainer }>
+                        <div style={ this.styles.marginRight }>Don't have an account?</div>
+                        <Link to="/signup">Sign up</Link>
+                    </div>
                 </div>
-                <div style={ this.styles.signUpLinkContainer }>
-                    <div style={ this.styles.marginRight }>Don't have an account?</div>
-                    <Link to="/signup">Sign up</Link>
-                </div>
-            </div>
             </Paper>
         );
     }

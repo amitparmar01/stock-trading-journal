@@ -19,6 +19,7 @@ module.exports = {
     ActionTypes: keyMirror({
     // App
     UPDATE_TITLE: null,
+    SEND_CONTACT_US_MESSAGE: null,
 
     // Login
     SIGN_UP: null,
