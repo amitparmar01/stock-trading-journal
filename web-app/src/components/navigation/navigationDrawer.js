@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -53,7 +54,7 @@ class NavigationDrawer extends Component {
 }
 
 NavigationDrawer.contextTypes = {
-    router: React.PropTypes.object
+    router: PropTypes.object.isRequired
 };
 
 export default NavigationDrawer;

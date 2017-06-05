@@ -5,13 +5,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppMuiTheme from './components/theme/appMuiTheme';
 import Navigation from './components/navigation/navigation';
 import { StickyContainer } from 'react-sticky';
-
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-injectTapEventPlugin();
-
 import './index.css';
-
 import AppStore from './shared/appStore';
 import Home from './pages/home/home';
 import Dashboard from './pages/dashboard/dashboard';
@@ -24,6 +20,8 @@ import ResetPassword from './pages/account/resetPassword/resetPassword';
 import Terms from './pages/terms/terms';
 import InternalServerError from './pages/errors/internalServerError/internalServerError';
 import PageNotFound from './pages/errors/pageNotFound/pageNotFound';
+
+injectTapEventPlugin();
 
 class App extends Component {
     constructor() {

@@ -2,7 +2,7 @@ import keyMirror from 'keymirror';
 
 var APIRoot = "http://localhost:3002";
 
-module.exports = {
+export default {
     API: {
         Root: "http://localhost:3002",
         Endpoints: {
@@ -17,13 +17,13 @@ module.exports = {
         Big: 120
     },
     ActionTypes: keyMirror({
-    // App
-    UPDATE_TITLE: null,
-    SEND_CONTACT_US_MESSAGE: null,
+        // App
+        UPDATE_TITLE: null,
+        SEND_CONTACT_US_MESSAGE: null,
 
-    // Login
-    SIGN_UP: null,
-    SIGN_IN: null,
-    RESET_PASSWORD: null
-  })
+        // Login
+        SIGN_UP: null,
+        SIGN_IN: null,
+        RESET_PASSWORD: null
+    })
 };

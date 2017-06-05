@@ -58,4 +58,4 @@ var AppActions = {
     }
 }
 
-module.exports = AppActions;
+export default AppActions;

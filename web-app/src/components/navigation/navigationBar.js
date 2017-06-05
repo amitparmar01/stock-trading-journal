@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -219,7 +220,7 @@ class NavigationBar extends Component {
 }
 
 NavigationBar.contextTypes = {
-    router: React.PropTypes.object
+    router: PropTypes.object.isRequired
 };
 
 export default NavigationBar;

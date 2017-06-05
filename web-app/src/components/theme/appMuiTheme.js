@@ -18,4 +18,4 @@ var AppMuiTheme = getMuiTheme({
     }
 });
 
-module.exports = AppMuiTheme;
+export default AppMuiTheme;

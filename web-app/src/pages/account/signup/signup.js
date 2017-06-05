@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -151,7 +152,7 @@ class Signup extends Component {
 }
 
 Signup.contextTypes = {
-    router: React.PropTypes.object
+    router: PropTypes.object.isRequired
 };
 
 export default Signup;
