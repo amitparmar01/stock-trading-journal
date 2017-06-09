@@ -21,6 +21,7 @@ import AppColors from '../theme/appColors';
 import AppStore from '../../shared/appStore';
 import ContactUs from './contactUs';
 import AddTrade from './addTradeDialog';
+import ManageAccounts from './manageAccounts';
 
 class NavigationBar extends Component {
     constructor() {
@@ -30,6 +31,7 @@ class NavigationBar extends Component {
             title: "",
             openPopover: false,
             contactUsDialogOpen: false,
+            accountsDialogOpen: false,
             addTradeDialogOpen: false
         };
 
@@ -82,6 +84,8 @@ class NavigationBar extends Component {
         this.linkTo = this.linkTo.bind(this);
         this.onContactUs = this.onContactUs.bind(this);
         this.onContactUsClose = this.onContactUsClose.bind(this);
+        this.onOpenAccounts = this.onOpenAccounts.bind(this);
+        this.onAccountsClose = this.onAccountsClose.bind(this);
         this.onAddTrade = this.onAddTrade.bind(this);
         this.onAddTradeClose = this.onAddTradeClose.bind(this);
         this.onSignOut = this.onSignOut.bind(this);
@@ -131,6 +135,14 @@ class NavigationBar extends Component {
         this.setState({ contactUsDialogOpen: false });
     }
     
+    onOpenAccounts() {
+        this.setState({ accountsDialogOpen: true });
+    }
+    
+    onAccountsClose() {
+        this.setState({ accountsDialogOpen: false });
+    }
+
     onAddTrade() {
         this.setState({ addTradeDialogOpen: true });
     }
@@ -158,6 +170,8 @@ class NavigationBar extends Component {
                         <IconButton tooltip="Help">
                             <HelpIcon color={ AppColors.light3 } />
                         </IconButton>
+                        <FlatButton label="Default" primary={ true } onTouchTap={ this.onOpenAccounts } />
+                        <ManageAccounts Open={ this.state.accountsDialogOpen } onClose={ this.onAccountsClose } />
                         <div style={ this.styles.username }>{ AppStore.getAuthenticatedUser().email }</div>
                         <IconButton disableTouchRipple={ true } onTouchTap={ this.onIconButtonClick }>
                             <NavigationExpandMoreIcon color={ AppColors.light3 } />

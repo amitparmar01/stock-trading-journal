@@ -33,8 +33,15 @@ class AddTrade extends Component {
                 display: 'flex',
                 flexFlow: 'row wrap'
             },
-            field: {
+            leftColumnField: {
                 marginRight: 80
+            },
+            datePickerField: {
+                height: 72
+            },
+            timePickerField: {
+                marginRight: 80,
+                height: 72
             },
             textarea: {
                 resize: 'none'
@@ -283,15 +290,14 @@ class AddTrade extends Component {
             <div>
                 <Dialog title="Add new trade" modal={ true } actions={ actions } open={ this.props.Open } onRequestClose={ this.onClose }>
                     <div style={ this.styles.main }>
-                        <TextField value={ this.state.symbolValue } floatingLabelText="Symbol" style={ this.styles.field } maxLength="10" onChange={ this.symbolChange } errorText={ this.state.symbolError } />
-                        <TextField value={ this.state.priceValue } floatingLabelText="Price" hintText="0.00" style={ this.styles.field } onChange={ this.priceChange } onBlur={ this.priceFocusOut } errorText={ this.state.priceError } />
-                        <TextField value={ this.state.sharesValue } floatingLabelText="Shares" style={ this.styles.field } onChange={ this.sharesChange } errorText={ this.state.sharesError } />
-                        <TextField value={ this.state.profitTargetValue } floatingLabelText="Profit Target" hintText="0.00" style={ this.styles.field } onChange={ this.profitTargetChange } onBlur={ this.profitTargetFocusOut } errorText={ this.state.profitTargetError } />
-                        <TextField value={ this.state.stopLossValue } floatingLabelText="Stop Loss" hintText="0.00" style={ this.styles.field } onChange={ this.stopLossChange } onBlur={ this.stopLossFocusOut } errorText={ this.state.stopLossError } />
-                        <DatePicker value={ this.state.dateValue } floatingLabelText="Date" style={ this.styles.field } mode="landscape" onChange={ this.dateChange } errorText={ this.state.dateError } />
-                        <TimePicker value={ this.state.timeValue } floatingLabelText="Time" style={ this.styles.field } onChange={ this.timeChange } errorText={ this.state.timeError } />
-
-                        <TextField value={ this.state.commissionValue } floatingLabelText="Commission" hintText="0.00" style={ this.styles.field } onChange={ this.commissionChange } onBlur={ this.commissionFocusOut } errorText={ this.state.commissionError } />
+                        <TextField value={ this.state.symbolValue } floatingLabelText="Symbol" style={ this.styles.leftColumnField } maxLength="10" onChange={ this.symbolChange } errorText={ this.state.symbolError } />
+                        <TextField value={ this.state.priceValue } floatingLabelText="Price" hintText="0.00" onChange={ this.priceChange } onBlur={ this.priceFocusOut } errorText={ this.state.priceError } />
+                        <TextField value={ this.state.sharesValue } floatingLabelText="Shares" style={ this.styles.leftColumnField } onChange={ this.sharesChange } errorText={ this.state.sharesError } />
+                        <TextField value={ this.state.profitTargetValue } floatingLabelText="Profit Target" hintText="0.00" onChange={ this.profitTargetChange } onBlur={ this.profitTargetFocusOut } errorText={ this.state.profitTargetError } />
+                        <TextField value={ this.state.stopLossValue } floatingLabelText="Stop Loss" hintText="0.00" style={ this.styles.leftColumnField } onChange={ this.stopLossChange } onBlur={ this.stopLossFocusOut } errorText={ this.state.stopLossError } />
+                        <DatePicker value={ this.state.dateValue } container="inline" floatingLabelText="Date" style={ this.styles.datePickerField } mode="landscape" onChange={ this.dateChange } errorText={ this.state.dateError } />
+                        <TimePicker value={ this.state.timeValue } container="inline" floatingLabelText="Time" style={ this.styles.timePickerField } onChange={ this.timeChange } errorText={ this.state.timeError } />
+                        <TextField value={ this.state.commissionValue } floatingLabelText="Commission" hintText="0.00" onChange={ this.commissionChange } onBlur={ this.commissionFocusOut } errorText={ this.state.commissionError } />
                         <TextField value={ this.state.entryStrategyValue } floatingLabelText="Entry Strategy" fullWidth={ true } onChange={ this.entryStrategyChange } errorText={ this.state.entryStrategyError } />
                         <TextField value={ this.state.notesValue } floatingLabelText="Notes" style={ this.styles.textarea } maxLength="200" fullWidth={ true } multiLine={ true } rowsMax={ 3 } onChange={ this.notesChange } errorText={ this.state.notesError } />
                     </div>
