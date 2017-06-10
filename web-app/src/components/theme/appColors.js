@@ -2,6 +2,7 @@ module.exports = {
     dark1: '#222222',
     dark2: '#333333',
     dark3: '#404040',
+    dark4: '#757575',
     light1: '#ffffff',
     light2: '#f5f5f5',
     light3: '#eaeaea',
