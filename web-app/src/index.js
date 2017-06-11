@@ -16,6 +16,7 @@ import Analysis from './pages/analysis/analysis';
 import Analytics from './pages/analytics/analytics';
 import Login from './pages/account/login/login';
 import Signup from './pages/account/signup/signup';
+import Settings from './pages/account/settings/settings';
 import ResetPassword from './pages/account/resetPassword/resetPassword';
 import Terms from './pages/terms/terms';
 import InternalServerError from './pages/errors/internalServerError/internalServerError';
@@ -67,6 +68,7 @@ class App extends Component {
                                     <Route path="/analytics" render={ () => this.checkAuthentication(<Analytics />) } />
                                     <Route path="/login" component={ Login } />
                                     <Route path="/signup" component={ Signup } />
+                                    <Route path="/account/settings" render={ () => this.checkAuthentication(<Settings />) } />
                                     <Route path="/reset-password" component={ ResetPassword } />
                                     <Route path="/terms" component={ Terms } />
                                     <Route path="/500" render={ () => this.checkAuthentication(<InternalServerError />) } />

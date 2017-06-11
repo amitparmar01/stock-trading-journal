@@ -41,3 +41,21 @@ a:active {
     line-height: 12px;
     color: rgb(244, 67, 54);
 }
+
+.big-text {
+    font-size: 32px;
+    color: rgba(0, 0, 0, 0.87);
+    line-height: 42px;
+}
+
+.medium-text {
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.87);
+    line-height: 36px;
+}
+
+.small-text {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.54);
+    line-height: 24px;
+}

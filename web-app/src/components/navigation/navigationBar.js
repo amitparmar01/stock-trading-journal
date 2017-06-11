@@ -32,7 +32,8 @@ class NavigationBar extends Component {
             openPopover: false,
             contactUsDialogOpen: false,
             accountsDialogOpen: false,
-            addTradeDialogOpen: false
+            addTradeDialogOpen: false,
+            activeAccount: "Default"
         };
 
         this.styles = {
@@ -82,6 +83,7 @@ class NavigationBar extends Component {
         this.onPopoverClose = this.onPopoverClose.bind(this);
         this.onChange = this.onChange.bind(this);
         this.linkTo = this.linkTo.bind(this);
+        this.onSettings = this.onSettings.bind(this);
         this.onContactUs = this.onContactUs.bind(this);
         this.onContactUsClose = this.onContactUsClose.bind(this);
         this.onOpenAccounts = this.onOpenAccounts.bind(this);
@@ -127,6 +129,11 @@ class NavigationBar extends Component {
         this.setState({ openPopover: false });
     }
 
+    onSettings() {
+        this.setState({ openPopover: false });
+        this.context.router.history.push("/account/settings");
+    }
+
     onContactUs() {
         this.setState({ contactUsDialogOpen: true, openPopover: false });
     }
@@ -139,8 +146,8 @@ class NavigationBar extends Component {
         this.setState({ accountsDialogOpen: true });
     }
     
-    onAccountsClose() {
-        this.setState({ accountsDialogOpen: false });
+    onAccountsClose(account) {
+        this.setState({ accountsDialogOpen: false, activeAccount: account.name });
     }
 
     onAddTrade() {
@@ -170,7 +177,7 @@ class NavigationBar extends Component {
                         <IconButton tooltip="Help">
                             <HelpIcon color={ AppColors.light3 } />
                         </IconButton>
-                        <FlatButton label="Default" primary={ true } onTouchTap={ this.onOpenAccounts } />
+                        <FlatButton label={ this.state.activeAccount } primary={ true } onTouchTap={ this.onOpenAccounts } />
                         <ManageAccounts Open={ this.state.accountsDialogOpen } onClose={ this.onAccountsClose } />
                         <div style={ this.styles.username }>{ AppStore.getAuthenticatedUser().email }</div>
                         <IconButton disableTouchRipple={ true } onTouchTap={ this.onIconButtonClick }>
@@ -178,7 +185,7 @@ class NavigationBar extends Component {
                         </IconButton>
                         <Popover open={ this.state.openPopover } anchorEl={this.state.anchorEl} onRequestClose={ this.onPopoverClose } animation={ PopoverAnimationVertical }>
                             <Menu>
-                                <MenuItem primaryText="Settings" />
+                                <MenuItem primaryText="Settings" onTouchTap={ this.onSettings } />
                                 <MenuItem primaryText="Contact us" onTouchTap={ this.onContactUs } />
                                 <MenuItem primaryText="Upgrade account" />
                                 <Divider />

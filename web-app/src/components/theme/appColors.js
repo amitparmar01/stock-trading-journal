@@ -12,5 +12,6 @@ module.exports = {
     bright2: '#fbf18e',
     bright3: '#fc7753',
     bright4: '#317ba4',
-    bright5: '#d53356'
+    bright5: '#d53356',
+    error: '#f44336'
 }
